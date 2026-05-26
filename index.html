@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felipe & Fabrício | Shows e Eventos Profissionais</title>
+    
+    <!-- Ícones Gratuitos (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CONFIGURAÇÕES GERAIS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0d0d0d; /* Preto Profundo */
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- TOPO / BARRA DE NAVEGAÇÃO SUPERIOR --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0d0d0d; 
+            border-bottom: 2px solid #3a3a3a; 
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+
+        /* Logo esquerda */
+        .logo-container img {
+            height: 85px; 
+            width: auto;
+            display: block;
+            transition: height 0.3s;
+        }
+
+        /* Logo FF Centralizada com base na logo principal abaixo */
+        .logo-central-ff-container {
+            position: absolute;
+            left: 50%; /* Centralização exata em relação à página e à logo de baixo */
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; 
+        }
+
+        .logo-central-ff-container img {
+            height: 65px; 
+            width: auto;
+            display: block;
+            filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.5));
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #a6a6a6; 
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255,255,255,0.6); 
+        }
+
+        /* --- BANNER PRINCIPAL (HERO) --- */
+        .hero {
+            height: 100vh;
+            min-height: 650px;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(13, 13, 13, 0.95)), 
+                url('foto-fundo.jpeg') no-repeat center 35%/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            align-items: center;
+            text-align: center;
+            padding: 160px 20px 60px 20px; 
+        }
+
+        .conteudo-hero-topo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-central {
+            max-height: 240px; 
+            width: auto;
+            margin-bottom: 20px; 
+            display: block;
+            filter: drop-shadow(0px 6px 15px rgba(0,0,0,0.9)); 
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #ffffff; 
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-shadow: 0px 2px 10px rgba(0,0,0,0.9); 
+        }
+
+        .btn-principal {
+            background: linear-gradient(135deg, #b0b0b0 0%, #efefef 50%, #7a7a7a 100%);
+            color: #0d0d0d;
+            padding: 15px 40px;
+            font-weight: bold;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: auto;
+        }
+
+        .btn-principal:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 25px rgba(255,255,255,0.25);
+        }
+
+        /* --- BARRAS CRUZADAS PRATEADAS --- */
+        .divisor-prata {
+            position: relative;
+            height: 20px;
+            width: 100%;
+            background: 
+                linear-gradient(45deg, transparent 45%, #555 49%, #fff 50%, #555 51%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, #555 49%, #fff 50%, #555 51%, transparent 55%);
+            background-size: 30px 30px;
+            opacity: 0.4;
+            margin: 20px 0;
+        }
+
+        /* --- SEÇÕES --- */
+        section {
+            padding: 80px 5% 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .titulo-secao {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .titulo-secao h2 {
+            font-size: 2.3rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .titulo-secao h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+        }
+
+        /* --- RELEASE --- */
+        .conteudo-release {
+            background-color: #151515; 
+            border: 1px solid #444444; 
+            border-left: 4px solid #b0b0b0; 
+            border-radius: 4px;
+            padding: 45px;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .conteudo-release p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* --- EVENTOS --- */
+        .container-eventos {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .botao-evento {
+            background: linear-gradient(135deg, #151515 0%, #222222 100%);
+            border: 1px solid #3a3a3a; 
+            border-radius: 4px;
+            padding: 45px 30px;
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .botao-evento .icone {
+            font-size: 2.8rem;
+            color: #a6a6a6; 
+            margin-bottom: 20px;
+        }
+
+        .botao-evento h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+
+        .botao-evento p {
+            color: #8c8c8c;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .botao-evento .btn-acao {
+            border: 2px solid #555555;
+            color: #b0b0b0;
+            padding: 8px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .botao-evento:hover {
+            background-color: #1c1c1c;
+            border-color: #ffffff; 
+            transform: translateY(-5px);
+        }
+
+        .botao-evento:hover .btn-acao { 
+            background: linear-gradient(135deg, #ffffff, #b0b0b0);
+            color: #0d0d0d; 
+            border-color: #ffffff; 
+        }
+
+        /* --- CONTAINER DE OUTRAS REDES (FACEBOOK, YOUTUBE, SPOTIFY) --- */
+        .container-outras-redes {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .btn-rede-social {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: 1px solid #3a3a3a;
+            color: #ffffff;
+            padding: 12px 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-rede-social i {
+            font-size: 1.2rem;
+        }
+
+        .btn-rede-social:hover {
+            border-color: #ffffff;
+            background-color: #111111;
+            transform: translateY(-2px);
+        }
+
+        /* --- SEÇÃO DE AVALIAÇÕES AUTOMÁTICAS --- */
+        .secao-avaliacoes {
+            max-width: 950px;
+            margin: 20px auto 40px auto;
+            padding: 0 10px;
+        }
+
+        .titulo-avaliacoes {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a6a6a6;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .titulo-avaliacoes i {
+            color: #fcbc05; 
+        }
+
+        /* --- RODAPÉ --- */
+        footer {
+            background-color: #050505;
+            border-top: 2px solid #3a3a3a;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contatos-diretos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .item-contato {
+            font-size: 1.1rem;
+            color: #cccccc;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .item-contato i {
+            color: #a6a6a6;
+            font-size: 1.2rem;
+        }
+
+        .item-contato:hover {
+            color: #ffffff;
+        }
+
+        .item-contato:hover i {
+            color: #ffffff;
+        }
+
+        .whats-fixo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            z-index: 1000;
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 12px; text-align: center; padding: 15px; }
+            .logo-container img { height: 70px; }
+            .logo-central-ff-container { position: relative; left: 0; transform: none; margin: 5px 0; }
+            .logo-central-ff-container img { height: 45px; }
+            nav ul { gap: 15px; }
+            nav a { font-size: 0.8rem; }
+            .hero { padding-top: 180px; background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(13, 13, 13, 0.95)), url('foto-fundo.jpeg') no-repeat center 25%/cover; } 
+            .logo-central { max-height: 160px; margin-bottom: 15px; } 
+            .hero p { font-size: 1.1rem; }
+            .item-contato { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGAÇÃO SUPERIOR -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Felipe e Fabrício">
+        </div>
+
+        <div class="logo-central-ff-container">
+            <img src="logo-ff.jpeg" alt="FF" onerror="this.src='logo-ff.jpg'">
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#release">Release</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#multimidia">Instagram</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HOME -->
+    <div id="home" class="hero">
+        <div class="conteudo-hero-topo">
+            <img src="logo.png" alt="Felipe & Fabrício" class="logo-central">
+            <p>A trilha sonora perfeita para o seu grande evento</p>
+        </div>
+        
+        <a href="https://wa.me/5541999444017?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20um%20evento%20com%20Felipe%20e%20Fabrício." target="_blank" class="btn-principal">Solicitar Orçamento</a>
+    </div>
+
+    <div class="divisor-prata"></div>
+
+    <!-- RELEASE -->
+    <section id="release">
+        <div class="titulo-secao">
+            <h2>Release</h2>
+            <p>A marca da boa música em eventos corporativos e sociais</p>
+        </div>
+        <div class="conteudo-release">
+            <p>Com um repertório altamente selecionado, qualidade técnica impecável e presença marcante, a dupla sertaneja Felipe & Fabricio de Curitiba, atua focada em entregar sofisticação e entertainment de alto nível em casamentos, formaturas, festas de 15 anos e eventos corporativos.</p>
+        </div>
+    </section>
+
+    <div class="divisor-prata"></div>
+
+    <!-- EVENTOS -->
+    <section id="eventos">
+        <div class="titulo-secao">
+            <h2>Formatos de Eventos</h2>
+            <p>Shows customizados de acordo com o seu público</p>
+        </div>
+        <div class="container-eventos">
+            <a href="https://wa.me/5541999444017?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20Casamento." target="_blank" class="botao-evento">
+                <div class="icone"><i class="fas fa-ring"></i></div>
+                <h3>Casamentos</h3>
+                <p>Trilha sonora requintada, cronograma cumprido à risca e pista de dance movimentada.</p>
+                <span class="btn-acao">Orçamento</span>
+            </a>
+            <a href="https://wa.me/5541999444017?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20Formatura." target="_blank" class="botao-evento">
+                <div class="icone"><i class="fas fa-graduation-cap"></i></div>
+                <h3>15 Anos & Formaturas</h3>
+                <p>Máxima energia no palco, repertório com os hits do momento e animação garantida.</p>
+                <span class="btn-acao">Orçamento</span>
+            </a>
+            <a href="https://wa.me/5541999444017?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20Evento%20Corporativo." target="_blank" class="botao-evento">
+                <div class="icone"><i class="fas fa-briefcase"></i></div>
+                <h3>Corporativos</h3>
+                <p>Pontualidade britânica, postura corporativa e som sob medida.</p>
+                <span class="btn-acao">Orçamento</span>
+            </a>
+        </div>
+    </section>
+
+    <div class="divisor-prata"></div>
+
+    <!-- SEÇÃO INSTAGRAM INTEGRADA + BOTÕES DAS OUTRAS PLATAFORMAS -->
+    <section id="multimidia" style="background-color: #000000; padding: 60px 5%; width: 100%;">
+        <div class="titulo-secao" style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 2.3rem; color: #ffffff; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 15px; position: relative; display: inline-block; padding-bottom: 10px;">
+                Instagram
+            </h2>
+        </div>
+
+        <!-- Feed do Instagram (Behold) -->
+        <div style="max-width: 900px; margin: 0 auto; min-height: 400px;">
+            <behold-widget feed-id="u0LXrPA36kk2rwWieypT"></behold-widget>
+            <script>
+              (() => {
+                const d=document,s=d.createElement("script");s.type="module";
+                s.src="https://w.behold.so/widget.js";d.head.append(s);
+              })();
+            </script>
+        </div>
+
+        <!-- BOTÕES SOCIAL MEDIA -->
+        <div class="container-outras-redes">
+            <a href="https://www.instagram.com/felipeefabricio?igsh=MTgwNjc5dmtxMmc4OA==" target="_blank" class="btn-rede-social">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.facebook.com/share/1A7gr9ejh1/?mibextid=wwXIfr" target="_blank" class="btn-rede-social">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://m.youtube.com/@felipeefabricio?ra=m" target="_blank" class="btn-rede-social">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="https://open.spotify.com/artist/0cK52BRgLjLjV8eCK46nhT?si=dKT2dWdTQpi7Cw0W8ZXK3A" target="_blank" class="btn-rede-social">
+                <i class="fab fa-spotify"></i> Spotify
+            </a>
+        </div>
+    </section>
+
+    <!-- RODAPÉ COM INFORMAÇÕES DE CONTATO + SEÇÃO DE AVALIAÇÕES AUTOMÁTICAS GOOGLE -->
+    <footer id="contato">
+        <div class="info-contato">
+            <p>Leve o show de <strong>Felipe & Fabrício</strong> para o seu evento</p>
+            
+            <!-- ÁREA AUTOMÁTICA DAS AVALIAÇÕES DO GOOGLE -->
+            <div class="secao-avaliacoes">
+                <div class="titulo-avaliacoes">
+                    <i class="fas fa-star"></i> Avaliações dos Nossos Clientes
+                </div>
+                
+                <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+                <script src="https://elfsightcdn.com/platform.js" async></script>
+                <div class="elfsight-app-d213566a-d2fa-4dd4-8923-21b93eb3acf5" data-elfsight-app-lazy></div>
+            </div>
+
+            <!-- Telefones e E-mail -->
+            <div class="contatos-diretos">
+                <a href="tel:+5541999444017" class="item-contato">
+                    <i class="fas fa-phone-alt"></i> (41) 99944-4017
+                </a>
+                <a href="mailto:felipeefabricio@hotmail.com" class="item-contato">
+                    <i class="fas fa-envelope"></i> felipeefabricio@hotmail.com
+                </a>
+            </div>
+        </div>
+        <p style="margin-top:50px; font-size:0.8rem; color:#333;">&copy; 2026 Felipe e Fabrício. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
+    <a href="https://wa.me/5541999444017?text=Olá!" target="_blank" class="whats-fixo">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
